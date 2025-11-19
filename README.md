@@ -33,5 +33,8 @@ As I continue developing this project, I'm focusing on:
 - Object-Oriented Programming Structure
 
 ---
+## 👤 Author
+
+*signed: Nic (Koos) – 19/11/2025* ✍️
 
 *This project represents my journey in learning software development. Each version shows my growing skills and understanding of building real-world applications.*
