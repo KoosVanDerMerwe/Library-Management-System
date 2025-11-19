@@ -33,6 +33,24 @@ class Book:
         db.execute(query, (self.id,))
         print("Book deleted successfully")
 
+    def search_book(self, isbn):
+        db = Database("library.db")
+        query = """SELECT * FROM books WHERE isbn = ?"""
+        row = db.fetchone(query, (isbn,))
+        
+        if row is None:
+            return None
+        
+        self.id = row[0]
+        self.title = row[1]
+        self.author = row[2]
+        self.isbn = row[3]
+        self.copies = row[4]
+
+        results = f"Book(id={self.id}, title='{self.title}', author='{self.author}', copies={self.copies})"
+        return results
+
+
     @staticmethod
     def get_all():
         db = Database("library.db")

@@ -50,7 +50,8 @@ class LibraryManager:
             print("1. Add New Book")
             print("2. Remove Book")
             print("3. View All Books")
-            print("4. Back to Main Menu")
+            print("4. Search Book")
+            print("5. Back to Main Menu")
             print("-" * 30)
 
             choice = input("Enter your choice (1-4): ")
@@ -84,7 +85,25 @@ class LibraryManager:
                 books = Book.get_all()
                 for book in books:
                     print(book)
+
             elif choice == "4":
+                print("\n--- Search Book by ISBN ---")
+                print("Available Books:")
+                books = Book.get_all()
+                for book in books:
+                    print(f"ID: {book.id} - {book.title}, ISBN: {book.isbn} by {book.author}")
+
+                book_isbn = input("\nEnter ISBN to search: ")
+                book = Book("", "", "", 0)
+                results = book.search_book(book_isbn)
+                if results is None:
+                    print(f"No book found with that ISBN: {book_isbn}.")
+                else:
+                    print(f"\nBook with ISBN: '{book_isbn}' was found:")
+                    print("-"*50)
+                    print(f"ID: {book.id} - {book.title}, by {book.author}")
+
+            elif choice == "5":
                 return
             else:
                 print("Invalid choice. Please try again.")

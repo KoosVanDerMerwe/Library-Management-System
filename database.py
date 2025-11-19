@@ -31,3 +31,13 @@ class Database:
 
         self.conn.close()
         return rows
+
+    def fetchone(self, query, params):
+        self.connect()
+        if params:
+            self.cursor.execute(query, params)
+        else:
+            self.cursor.execute(query)
+        one = self.cursor.fetchone()
+        self.conn.close()
+        return one
