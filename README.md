@@ -1,40 +1,59 @@
+# Library Management System
 
-## 🎯 Getting Started
+## Getting Started
 
-1. Clone the repository
-2. Run `python main.py` to start the application
-3. Use the menu system to manage books, members, and loans
-4. All data is automatically saved in the SQLite database
-
-## 📈 Project Journey
-
-This is my first major Python project where I built a complete application from start to finish. I took on this challenge to deeply learn Object-Oriented Programming and software architecture.
-
-### Current Status: ✅ Version 1.0 Complete
-- All core features implemented and tested
-- Clean OOP architecture
-- Fully functional menu system
-
-### What's Next: 🔄 Continuous Development
-This is a living project that I'll be continuously improving. Here's what I'm planning:
-
-## 💡 Learning Focus
-
-As I continue developing this project, I'm focusing on:
-- Improving code architecture and design patterns
-- Adding proper testing and documentation
-- Learning web development frameworks
-- Implementing best practices for database design
-
-## 🛠️ Built With
-
-- Python 3.13.9
-- SQLite3
-- Object-Oriented Programming Structure
+1. Clone the repository.
+2. Run `python main.py` to start the application.
+3. Use the menu system to manage books, members, and loans.
+4. All data is automatically stored in the SQLite database.
 
 ---
-## 👤 Author
 
-*signed: Nic (Koos) – 19/11/2025* ✍️
+## Project Journey
 
-*This project represents my journey in learning software development. Each version shows my growing skills and understanding of building real-world applications.*
+This is my first major Python project where I built a complete application from start to finish. I used this project to learn Object-Oriented Programming and basic software architecture in a practical way.
+
+### Current Status – v1.1.0
+
+- All core features for books, members, and loans implemented.
+- Clean OOP structure with separate models and manager logic.
+- Fully functional, menu-driven console interface.
+
+---
+
+## Features
+
+### Books
+
+- Add Book  
+- Delete Book  
+- View All Books  
+- Search Book by ISBN  
+
+### Members
+
+- Add Member  
+- Remove Member  
+- View All Members  
+
+### Loans
+
+- Loan a Book  
+- Return a Book  
+
+---
+
+## Tech Stack
+
+- Python 3.13.9  
+- SQLite3  
+- Object-Oriented design (separate model and manager classes)
+
+---
+
+## Author
+
+**Nic (Koos)**  
+*Signed: 19/11/2025*
+
+This project represents my learning journey in software development. Each version/commit marks a clear step in understanding how to build and structure real applications.
