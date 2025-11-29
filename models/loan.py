@@ -5,7 +5,7 @@ from models.book import Book
 
 
 class Loan:
-    def __init__(self,book_id, member_id, loan_date, due_date, returned, id=None):
+    def __init__(self, book_id, member_id, loan_date, due_date, returned, id=None):
         self.id = id
         self.book_id = book_id
         self.member_id = member_id

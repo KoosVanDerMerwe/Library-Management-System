@@ -21,22 +21,19 @@ class LibraryManager:
             print("=" * 40)
             print("1. Book Management")
             print("2. Member Management")
-            print("3. Loan a Book")
-            print("4. Return a Book")
-            print("5. Exit System")
+            print("3. Loan Management")
+            print("4. Exit System")
             print("-" * 40)
 
-            choice = input("Enter your choice (1-5): ")
+            choice = input("Enter your choice (1-4): ")
 
             if choice == "1":
                 self.book_menu()
             elif choice == "2":
                 self.member_menu()
             elif choice == "3":
-                self.loan_book()
+                self.loan_menu()
             elif choice == "4":
-                self.return_book()
-            elif choice == "5":
                 print("\nThank you for using Library Management System!")
                 break
             else:
@@ -151,6 +148,30 @@ class LibraryManager:
             else:
                 print("Invalid choice. Please try again.")
 
+    def loan_menu(self):
+        while True:
+            print("\n" + "=" * 30)
+            print("       LOAN MANAGEMENT")
+            print("=" * 30)
+            print("1. Loan a Book")
+            print("2. Return a Book")
+            print("3. View All Loans")
+            print("4. Back to Main Menu")
+            print("-" * 30)
+
+            choice = input("Enter your choice (1-4): ")
+
+            if choice == "1":
+                self.loan_book()
+            elif choice == "2":
+                self.return_book()
+            elif choice == "3":
+                self.view_all_loans()
+            elif choice == "4":
+                return
+            else:
+                print("Invalid choice. Please try again.")
+
     def loan_book(self):
         print("\n" + "=" * 30)
         print("         LOAN A BOOK")
@@ -177,21 +198,51 @@ class LibraryManager:
         due_date = (datetime.datetime.now() + datetime.timedelta(days=30)).strftime("%Y-%m-%d")
         loan = Loan(book_id, member_id, loan_date, due_date, False)
         loan.loan_out()
-        print("\nBook loaned successfully!")
 
     def return_book(self):
         print("\n" + "=" * 30)
         print("        RETURN A BOOK")
         print("=" * 30)
 
+        loans = Loan.get_all()
+        active_loans = [loan for loan in loans if not loan.returned]
+        
+        if not active_loans:
+            print("\nNo loans currently active.")
+            return
+        
         print("\nActive Loans:")
         print("-" * 50)
-        loans = Loan.get_all()
-        for loan in loans:
-            if not loan.returned:
-                print(f"Loan ID: {loan.id} - Book ID: {loan.book_id}")
+        for loan in active_loans:
+            print(f"Loan ID: {loan.id} - Book ID: {loan.book_id}")
 
-        book_id = int(input("\nEnter book ID to delete: "))
-        loan = Loan(0, 0, "", "", True, id=book_id)
-        loan.return_book()
-        print("\nBook returned successfully!")
+        loan_id = int(input("\nEnter loan ID to return: "))
+        loan = Loan.find_by_id(loan_id)
+        if loan:
+            loan.return_book()
+        else:
+            print(f"Loan with ID {loan_id} not found.")
+
+    def view_all_loans(self):
+        print("\n" + "=" * 30)
+        print("        ALL LOANS")
+        print("=" * 30)
+
+        loans = Loan.get_all()
+        if not loans:
+            print("\nNo loans in the system.")
+            return
+
+        print("\nAll Loans:")
+        print("-" * 80)
+        print(f"{'Loan ID':<10} {'Book ID':<10} {'Member ID':<12} {'Loan Date':<12} {'Due Date':<12} {'Status':<10}")
+        print("-" * 80)
+        
+        for loan in loans:
+            status = "RETURNED" if loan.returned else "ACTIVE"
+            print(f"{loan.id:<10} {loan.book_id:<10} {loan.member_id:<12} {loan.loan_date:<12} {loan.due_date:<12} {status:<10}")
+        
+        print("-" * 80)
+        active_count = sum(1 for loan in loans if not loan.returned)
+        returned_count = sum(1 for loan in loans if loan.returned)
+        print(f"Total Loans: {len(loans)} | Active: {active_count} | Returned: {returned_count}")
