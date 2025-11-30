@@ -81,7 +81,7 @@ class LibraryManager:
                 print("-" * 50)
                 books = Book.get_all()
                 for book in books:
-                    print(book)
+                    print(f"ID: {book.id} - {book.title} by {book.author}")
 
             elif choice == "4":
                 print("\n--- Search Book by ISBN ---")
